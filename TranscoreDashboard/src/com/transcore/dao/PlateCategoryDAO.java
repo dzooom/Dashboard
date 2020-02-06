@@ -38,8 +38,8 @@ public class PlateCategoryDAO {
 				
 				categoryObject.setDisplayOrder(displayOrder);
 				categoryObject.setPlateCategoryDesc(categoryDesc);
-				categoryObject.setPlateCategoryArbDesc(categoryDescArb);
-				categoryObject.setPlateCategoryID(id);
+				categoryObject.setPlateCategArbDesc(categoryDescArb);
+				categoryObject.setPlateCategoryId(id);
 				
 				plateCategoryList.add(categoryObject);		
 			}

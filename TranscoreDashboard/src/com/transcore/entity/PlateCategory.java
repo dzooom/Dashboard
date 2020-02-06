@@ -2,42 +2,51 @@ package com.transcore.entity;
 
 public class PlateCategory {
 	
-	private short tiPlateCategoryID;
-	private String vcPlateCategoryDesc;
-	private short tiDisplayOrder;
-	private String nvcPlateCategArbDesc;
+	private short plateCategoryId;
+	private String plateCategoryDesc;
+	private short displayOrder;
+	private String plateCategArbDesc;
 	
-	public short getPlateCategoryID() {
-		return this.tiPlateCategoryID;
+	public short getPlateCategoryId() {
+		return this.plateCategoryId;
 	}
 	
-	public void setPlateCategoryID(short id) {
-		tiPlateCategoryID = id;
+	public void setPlateCategoryId(short id) {
+		plateCategoryId = id;
 	}
+	
+	
+	
 	
 	public String getPlateCategoryDesc() {
-		return this.vcPlateCategoryDesc;
+		return this.plateCategoryDesc;
 	}
 	
 	public void setPlateCategoryDesc(String plateCategoryDesc) {
-		vcPlateCategoryDesc = plateCategoryDesc;
+		this.plateCategoryDesc = plateCategoryDesc;
 	}
 	
+	
+	
+	
 	public short getDisplayOrder() {
-		return tiDisplayOrder;
+		return displayOrder;
 	}
 	
 	public void setDisplayOrder(short displayOrder) {
-		tiDisplayOrder = displayOrder;
+		this.displayOrder = displayOrder;
 	}
 	
 	
-	public String getPlateCategoryArbDesc(){
-		return nvcPlateCategArbDesc;
+	
+	
+	
+	public String getPlateCategArbDesc(){
+		return plateCategArbDesc;
 	}
 	
-	public void setPlateCategoryArbDesc(String desc) {
-		nvcPlateCategArbDesc = desc;
+	public void setPlateCategArbDesc(String plateCategArbDesc) {
+		this.plateCategArbDesc = plateCategArbDesc;
 	}
 	
 }

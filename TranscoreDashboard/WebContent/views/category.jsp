@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="com.transcore.entity.PlateCategory" %>
+<%@ page import="java.util.*" %>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
     
@@ -11,11 +13,36 @@
 </head>
 <body>
 
-<c:forEach var="i" begin="0" end="10">
 
-<div> test </div>
 
-</c:forEach>
+<table>
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Description EN</th>
+			<th>Display Order</th>
+			<th>Description AR</th>
+		</tr>
+	</thead>
+	<tbody>
+		
+	<c:forEach var="category" items="${data}">	
+	
+	<tr>
+		<td>${category.plateCategoryId}</td>
+		<td>${category.plateCategoryDesc}</td>
+		<td>${category.displayOrder}</td>
+		<td>${category.plateCategArbDesc}</td>
+	</tr>
+	
+	</c:forEach>
+	
+	</tbody>
+</table>
+
+
+
+
 
 </body>
 </html>

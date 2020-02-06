@@ -35,6 +35,7 @@ public class PlateCategoryController extends HttpServlet {
 		
 		PlateCategoryDAO categoryDAO = new PlateCategoryDAO();
 		List<PlateCategory> plateCategoryList = categoryDAO.getPlateCategoryList();
+		request.setAttribute("data", plateCategoryList);
 		
 		RequestDispatcher dispatcher =  request.getRequestDispatcher("/views/category.jsp");
 		dispatcher.forward(request, response);
