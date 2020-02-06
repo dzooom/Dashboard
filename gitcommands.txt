@@ -5,7 +5,8 @@ details : clone remote repo to local
 
 
 2 - git add:
-c : git add .
+c : git add . 
+c : git add filename.txt
 
 details: stage the file for commit to your local repository
 
@@ -13,6 +14,7 @@ details: stage the file for commit to your local repository
 
 3 - commint:
 c : git commit -m "Your comments"
+c : git commit -m 'my notes' path/to/my/file.ext  for single file
 
 details : it will check in file that you have staged in your local repository. after this command we still need to push local repo to origin
 
@@ -38,8 +40,25 @@ c : git checkout your-branch
 c : git branch -a
 
 
+
+
 8 - create new branch from current active branch:
 c : git checkout -b <branch-name>
+
+
+9 : create a new branch:
+c : git branch name-of-branch
+
+
+
+10 : suppose we want to merge dev branch to master branch. first check out master then run merge command . 
+c : git checkout master
+c : git merge dev
+
+
+11 : view pending changes:
+c : git diff
+
 
 
 
