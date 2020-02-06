@@ -1,0 +1,4 @@
+https://stackoverflow.com/questions/9428573/is-it-safe-to-use-a-static-java-sql-connection-instance-in-a-multithreaded-syste
+
+
+https://stackoverflow.com/questions/5602772/how-often-should-connection-statement-and-resultset-be-closed-in-jdbc
