@@ -1,0 +1,46 @@
+1 - git clone:
+c : git clone repourl
+
+details : clone remote repo to local 
+
+
+2 - git add:
+c : git add .
+
+details: stage the file for commit to your local repository
+
+
+
+3 - commint:
+c : git commit -m "Your comments"
+
+details : it will check in file that you have staged in your local repository. after this command we still need to push local repo to origin
+
+
+4 - push:
+c: git push origin your-branch(master/dev)
+
+details : this will push changes to your origin. after this you will see code changes in github
+
+
+ 
+5 - pull:
+c : git pull origin your-branch
+
+details : get the content from origin
+
+
+6 - git checkout:
+c : git checkout your-branch
+
+
+7 - list branches:
+c : git branch -a
+
+
+8 - create new branch from current active branch:
+c : git checkout -b <branch-name>
+
+
+
+
