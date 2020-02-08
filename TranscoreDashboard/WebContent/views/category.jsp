@@ -10,12 +10,13 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 </head>
 <body>
 
 
 
-<table>
+<table border="2" class="table">
 	<thead>
 		<tr>
 			<th>ID</th>

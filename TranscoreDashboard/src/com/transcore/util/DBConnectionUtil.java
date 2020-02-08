@@ -6,7 +6,7 @@ import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 
 public class DBConnectionUtil  {
 
-	private static final String URL = "jdbc:sqlserver://localhost;databaseName=dbDTS";
+	private static final String URL = "jdbc:sqlserver://localhost:1433;databaseName=dbDTS";
 	private static final String DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 	private static final String USER = "sa";
 	private static final String PASSWORD = "Transcore#123";
