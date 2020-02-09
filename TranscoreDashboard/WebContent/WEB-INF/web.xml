@@ -20,4 +20,14 @@
   
   </servlet-mapping>
   
+  <servlet>
+	  <servlet-name>addcategory</servlet-name>
+	  <jsp-file>add-category.jsp</jsp-file>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>addcategory</servlet-name>
+  	<url-pattern>views/add-category</url-pattern>
+  </servlet-mapping>
+  
 </web-app>
