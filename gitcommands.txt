@@ -57,7 +57,13 @@ c : git merge dev
 
 
 11 : view pending changes:
-c : git diff
+c : git diff master origin/master
+
+
+12 : fetch
+in order to compare local copy with origin first use git fetch 
+then use git diff master origin/master
+git fetch
 
 
 
