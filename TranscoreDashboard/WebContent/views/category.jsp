@@ -16,6 +16,9 @@
 
 
 
+<div class="container">
+<div style="padding-top:20px">
+<a href="${pageContext.request.contextPath}/views/add-category.jsp" class="btn btn-primary">Add Category</a>
 <table border="2" class="table">
 	<thead>
 		<tr>
@@ -23,6 +26,7 @@
 			<th>Description EN</th>
 			<th>Display Order</th>
 			<th>Description AR</th>
+			<th>Action</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -34,16 +38,15 @@
 		<td>${category.plateCategoryDesc}</td>
 		<td>${category.displayOrder}</td>
 		<td>${category.plateCategArbDesc}</td>
+		<td><a href=""> Edit </a> | <a href=""> Delete </a></td>
 	</tr>
 	
 	</c:forEach>
 	
 	</tbody>
 </table>
+</div>
 
-
-
-
-
+</div>
 </body>
 </html>
