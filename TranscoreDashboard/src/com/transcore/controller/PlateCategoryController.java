@@ -1,6 +1,7 @@
 package com.transcore.controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,41 +14,80 @@ import com.transcore.dao.*;
 import com.transcore.entity.*;
 
 
-
-/**
- * Servlet implementation class PlateCategoryController
- */
-
 public class PlateCategoryController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    /**
-     * Default constructor. 
-     */
+   
     public PlateCategoryController() {
-        // TODO Auto-generated constructor stub
+        
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		
-		PlateCategoryDAO categoryDAO = new PlateCategoryDAO();
-		List<PlateCategory> plateCategoryList = categoryDAO.getPlateCategoryList();
-		request.setAttribute("data", plateCategoryList);
+		String action = request.getParameter("action");
+		if(action == null) {
+			action = "list";
+		}
 		
-		RequestDispatcher dispatcher =  request.getRequestDispatcher("/views/category.jsp");
-		dispatcher.forward(request, response);
+		switch(action)
+		{
+			case "list":
+				getPlateCategoryList(request, response);
+			break;
+			
+			case "edit":
+			break;
+			case "delete":
+			break;
+		}	
+			
 		
+		getPlateCategoryList(request,response);		
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+				
+		// 1 - get form parameters
+		String descEn = request.getParameter("categorydesc");
+		Short displayOrder = Short.valueOf(request.getParameter("displayorder"));
+		String descAr = request.getParameter("categorydescar");
+		
+		PlateCategory category = new PlateCategory();
+		category.setPlateCategoryDesc(descEn);
+		category.setDisplayOrder(displayOrder);
+		category.setPlateCategArbDesc(descAr);
+				
+		try
+		{
+			PlateCategoryDAO.addCategory(category);
+		} 
+		catch (ClassNotFoundException | SQLException e) 
+		{
+			
+			e.printStackTrace();	
+		}
+		
+		getPlateCategoryList(request, response);
+	}
+	
+	public void getPlateCategoryList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+				
+		List<PlateCategory> plateCategoryList;
+		
+		try 
+		{
+			plateCategoryList = PlateCategoryDAO.getPlateCategoryList();			
+			request.setAttribute("data", plateCategoryList);		
+			RequestDispatcher dispatcher =  request.getRequestDispatcher("/views/category.jsp");
+			dispatcher.forward(request, response);
+		}
+		catch (ClassNotFoundException | SQLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 	}
 
 }

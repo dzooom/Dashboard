@@ -11,23 +11,26 @@
   </welcome-file-list>
   
   <servlet>
-  <servlet-name>platecategory</servlet-name>
-  <servlet-class>com.transcore.controller.PlateCategoryController</servlet-class>
+	  <servlet-name>platecategory</servlet-name>
+	  <servlet-class>com.transcore.controller.PlateCategoryController</servlet-class>
   </servlet>
+  
+<servlet>
+	  <servlet-name>addcategory</servlet-name>
+	  <jsp-file>/views/add-category.jsp</jsp-file>
+</servlet>
+  
   <servlet-mapping>
   <servlet-name>platecategory</servlet-name>
   <url-pattern>/plate-category</url-pattern>
   
   </servlet-mapping>
   
-  <servlet>
-	  <servlet-name>addcategory</servlet-name>
-	  <jsp-file>add-category.jsp</jsp-file>
-  </servlet>
+
   
   <servlet-mapping>
   	<servlet-name>addcategory</servlet-name>
-  	<url-pattern>views/add-category</url-pattern>
+  	<url-pattern>/add-category</url-pattern>
   </servlet-mapping>
   
 </web-app>

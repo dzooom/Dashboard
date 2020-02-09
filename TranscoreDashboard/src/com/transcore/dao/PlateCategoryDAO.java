@@ -6,9 +6,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class PlateCategoryDAO {
 
-	public List<PlateCategory> getPlateCategoryList(){
+	public static List<PlateCategory> getPlateCategoryList() throws SQLException,ClassNotFoundException{
 		
 		List<PlateCategory> plateCategoryList = new ArrayList<PlateCategory>();	
 		
@@ -45,15 +46,6 @@ public class PlateCategoryDAO {
 			}
 		}
 		
-		catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		
 		finally {
 						
 			try {
@@ -68,5 +60,34 @@ public class PlateCategoryDAO {
 		}
 		
 		return plateCategoryList;
+	}
+	
+	private static Short getLastInsertedID(Statement statement) throws SQLException, ClassNotFoundException {
+		
+		try(ResultSet result = statement.executeQuery("SELECT max(tiPlateCategID) as MaxId FROM stbPlateCateg");)
+		{
+			result.next();	
+			
+			Short maxID = result.getShort("MaxId");
+			
+			return maxID;	
+			
+		}			
+	}
+	
+	public static void addCategory(PlateCategory category) throws SQLException, ClassNotFoundException {
+		
+		
+		try(Connection connection = DBConnectionUtil.getConnection();
+				Statement statement = connection.createStatement())
+		{
+			
+			Short lastId =  getLastInsertedID(statement);
+			String query = String.format("INSERT INTO stbPlateCateg (tiPlateCategID,vcPlateCategDesc,tiDisplayOrder,nvcPlateCategArbDesc) "
+					+ "VALUES (%d,'%s',%d,'%s')", 
+					++lastId,category.getPlateCategoryDesc(),category.getDisplayOrder(),category.getPlateCategArbDesc());
+			statement.executeUpdate(query);
+		}	
+				
 	}
 }

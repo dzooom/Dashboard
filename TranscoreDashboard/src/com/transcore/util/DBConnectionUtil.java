@@ -2,7 +2,6 @@
 package com.transcore.util;
 
 import java.sql.*;
-import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 
 public class DBConnectionUtil  {
 
@@ -11,14 +10,21 @@ public class DBConnectionUtil  {
 	private static final String USER = "sa";
 	private static final String PASSWORD = "Transcore#123";
 	
-	public static Connection getConnection() throws ClassNotFoundException,SQLException{
+	static  {
 		
-		// 1 - register driver
-		Class.forName(DRIVER);
-		
-		// 2 - get connection using connection manager
-		return DriverManager.getConnection(URL,USER,PASSWORD);		
-		
+		try {
+			
+			DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
+		} 
+		catch (Exception e) {	
+			
+			throw new RuntimeException("Sql Driver Failed To Register");			
+		}
 	}
 	
+	public static Connection getConnection() throws ClassNotFoundException,SQLException{
+				
+		// 2 - get connection using connection manager
+		return DriverManager.getConnection(URL,USER,PASSWORD);
+	}	
 }
