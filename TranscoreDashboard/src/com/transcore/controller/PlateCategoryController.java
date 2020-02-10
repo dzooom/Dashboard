@@ -26,6 +26,8 @@ public class PlateCategoryController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		
 		String action = request.getParameter("action");
+		
+		
 		if(action == null) {
 			action = "list";
 		}
@@ -37,13 +39,17 @@ public class PlateCategoryController extends HttpServlet {
 			break;
 			
 			case "edit":
+				getPlateCategory(request,response);
+					
 			break;
 			case "delete":
 			break;
-		}	
 			
-		
-		getPlateCategoryList(request,response);		
+			default:
+				getPlateCategoryList(request,response);
+				
+		}	
+				
 	}
 
 	
@@ -88,6 +94,37 @@ public class PlateCategoryController extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
+	}
+	
+	public void getPlateCategory(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		
+		String sId = request.getParameter("categoryid");
+		
+		if(sId != null && !sId.trim().equals(""))
+		{
+			short id = Short.parseShort(sId);
+			System.out.println(id);
+			
+			try 
+			{
+				PlateCategory category = PlateCategoryDAO.getPlateCategory(id);
+				request.setAttribute("category", category);
+				RequestDispatcher dispacher = request.getRequestDispatcher("/views/add-category.jsp");
+				dispacher.forward(request, response);
+				
+			}
+			catch (Exception e) 
+			{	
+				e.printStackTrace();
+			}
+			
+		}
+		
+		else {		
+			response.sendRedirect("views/add-category.jsp");
+			return;
+		}
+	
 	}
 
 }

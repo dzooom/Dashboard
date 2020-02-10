@@ -90,4 +90,31 @@ public class PlateCategoryDAO {
 		}	
 				
 	}
+	
+	public static PlateCategory getPlateCategory(short id) throws ClassNotFoundException, SQLException, Exception {
+		
+		try(Connection connection = DBConnectionUtil.getConnection()){
+			
+			Statement statetment = connection.createStatement();
+			
+			String query =  String.format("SELECT * FROM stbPlateCateg WHERE tiPlateCategID = %d", id);
+			
+			ResultSet row = statetment.executeQuery(query);
+			
+			if(row.next()) {
+				String desc = row.getString("vcPlateCategDesc");
+				short displayOrder = row.getShort("tiDisplayOrder");
+				String descAr = row.getString("nvcPlateCategArbDesc");
+				
+				PlateCategory category = new PlateCategory();
+				category.setPlateCategoryDesc(desc);
+				category.setDisplayOrder(displayOrder);
+				category.setPlateCategArbDesc(descAr);
+				return category ;
+				
+			}
+			
+			throw new Exception(String.format("plate category with id = %d does not exist",id));
+		}
+	}
 }

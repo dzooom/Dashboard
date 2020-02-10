@@ -38,7 +38,7 @@
 		<td>${category.plateCategoryDesc}</td>
 		<td>${category.displayOrder}</td>
 		<td>${category.plateCategArbDesc}</td>
-		<td><a href=""> Edit </a> | <a href=""> Delete </a></td>
+		<td><a href="plate-category?action=edit&categoryid=${category.plateCategoryId}"> Edit </a> | <a href=""> Delete </a></td>
 	</tr>
 	
 	</c:forEach>
