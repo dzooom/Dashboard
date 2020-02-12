@@ -16,7 +16,9 @@ https://stackoverflow.com/questions/5031018/how-to-invoke-a-servlet-without-mapp
 https://stackoverflow.com/questions/11645516/giving-multiple-url-patterns-to-servlet-filter
 
 
-=============
+https://www.splessons.com/lesson/jsp-security/
+
+=========================================================
 
 topics to look and write :
 
@@ -29,3 +31,7 @@ Here TranscoreDashboard is a contextPath.
 2 - servlet mapping and jsp mapping in web.xml
 
 3 - web-inf
+
+
+
+
