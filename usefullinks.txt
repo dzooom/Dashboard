@@ -8,3 +8,6 @@ https://www.journaldev.com/1933/java-servlet-filter-example-tutorial
 
 
 https://javapapers.com/servlet/what-is-servlet-mapping/
+
+
+https://stackoverflow.com/questions/5031018/how-to-invoke-a-servlet-without-mapping-in-web-xml
