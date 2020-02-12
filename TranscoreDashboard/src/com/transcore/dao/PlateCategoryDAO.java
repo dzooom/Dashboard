@@ -8,8 +8,14 @@ import java.util.List;
 
 
 public class PlateCategoryDAO {
+	
+	private static String dbUrl;
+	
+	public static void setDbUrl(String url) {
+		dbUrl = url;
+	}
 
-	public static List<PlateCategory> getPlateCategoryList() throws SQLException,ClassNotFoundException{
+	public static List<PlateCategory> getList() throws SQLException,ClassNotFoundException{
 		
 		List<PlateCategory> plateCategoryList = new ArrayList<PlateCategory>();	
 		
@@ -20,7 +26,7 @@ public class PlateCategoryDAO {
 		try {
 			
 			// 1 - get connection
-			connection = DBConnectionUtil.getConnection();
+			connection = DBConnectionUtil.getConnection(dbUrl);
 			
 			// 2 - create statement			
 			statement = connection.createStatement();
@@ -46,17 +52,10 @@ public class PlateCategoryDAO {
 			}
 		}
 		
-		finally {
-						
-			try {
-				connection.close();
-				statement.close();
-				recordSet.close();
-			} 
-			catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		finally{
+			connection.close();
+			statement.close();
+			recordSet.close();
 		}
 		
 		return plateCategoryList;
@@ -75,10 +74,11 @@ public class PlateCategoryDAO {
 		}			
 	}
 	
-	public static void addCategory(PlateCategory category) throws SQLException, ClassNotFoundException {
+	public static boolean addCategory(PlateCategory category) throws SQLException, ClassNotFoundException {
 		
+		int rowsEffected = 2;
 		
-		try(Connection connection = DBConnectionUtil.getConnection();
+		try(Connection connection = DBConnectionUtil.getConnection(dbUrl);
 				Statement statement = connection.createStatement())
 		{
 			
@@ -86,35 +86,64 @@ public class PlateCategoryDAO {
 			String query = String.format("INSERT INTO stbPlateCateg (tiPlateCategID,vcPlateCategDesc,tiDisplayOrder,nvcPlateCategArbDesc) "
 					+ "VALUES (%d,'%s',%d,'%s')", 
 					++lastId,category.getPlateCategoryDesc(),category.getDisplayOrder(),category.getPlateCategArbDesc());
-			statement.executeUpdate(query);
+			rowsEffected = statement.executeUpdate(query);
 		}	
-				
+			
+		return rowsEffected == 1;
 	}
 	
-	public static PlateCategory getPlateCategory(short id) throws ClassNotFoundException, SQLException, Exception {
+	public static PlateCategory getCategory(short id) throws ClassNotFoundException, SQLException, Exception {
 		
-		try(Connection connection = DBConnectionUtil.getConnection()){
+		String query =  String.format("SELECT * FROM stbPlateCateg WHERE tiPlateCategID = %d", id);		
+		
+		try(Connection connection = DBConnectionUtil.getConnection(dbUrl);
+				Statement statetment = connection.createStatement();
+				ResultSet row = statetment.executeQuery(query)){	
 			
-			Statement statetment = connection.createStatement();
-			
-			String query =  String.format("SELECT * FROM stbPlateCateg WHERE tiPlateCategID = %d", id);
-			
-			ResultSet row = statetment.executeQuery(query);
-			
-			if(row.next()) {
+			if(row.next()) 
+			{
 				String desc = row.getString("vcPlateCategDesc");
 				short displayOrder = row.getShort("tiDisplayOrder");
 				String descAr = row.getString("nvcPlateCategArbDesc");
+				short categoryId = row.getShort("tiPlateCategID");
 				
 				PlateCategory category = new PlateCategory();
 				category.setPlateCategoryDesc(desc);
 				category.setDisplayOrder(displayOrder);
 				category.setPlateCategArbDesc(descAr);
+				category.setPlateCategoryId(categoryId);
 				return category ;
 				
 			}
 			
 			throw new Exception(String.format("plate category with id = %d does not exist",id));
 		}
+	}
+	
+	public static boolean updateCategory(PlateCategory plateCategory) throws ClassNotFoundException, SQLException {
+		
+		try(Connection connection = DBConnectionUtil.getConnection(dbUrl);
+				Statement statement = connection.createStatement())
+		{
+			String query = String.format("UPDATE stbPlateCateg SET vcPlateCategDesc = '%s', tiDisplayOrder = %d, nvcPlateCategArbDesc = '%s'"
+					+ "  WHERE tiPlateCategID = %d " , plateCategory.getPlateCategoryDesc(),plateCategory.getDisplayOrder(),plateCategory.getPlateCategArbDesc(),plateCategory.getPlateCategoryId());			
+			
+			int rowsEffected = statement.executeUpdate(query);	
+			
+			return rowsEffected == 1;
+		}	
+	}
+	
+	public static boolean deleteCategory(short plateCategoryId) throws ClassNotFoundException, SQLException {
+		
+		try(Connection connection = DBConnectionUtil.getConnection(dbUrl);Statement statement = connection.createStatement())
+		{
+			String query = String.format("DELETE FROM stbPlateCateg WHERE tiPlateCategID = %d " , plateCategoryId);			
+			
+			int rowsEffected = statement.executeUpdate(query);	
+			
+			return rowsEffected == 1;
+		}		
+		
 	}
 }

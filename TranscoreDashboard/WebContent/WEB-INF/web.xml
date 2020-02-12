@@ -15,22 +15,41 @@
 	  <servlet-class>com.transcore.controller.PlateCategoryController</servlet-class>
   </servlet>
   
-<servlet>
-	  <servlet-name>addcategory</servlet-name>
-	  <jsp-file>/views/add-category.jsp</jsp-file>
-</servlet>
-  
   <servlet-mapping>
-  <servlet-name>platecategory</servlet-name>
-  <url-pattern>/plate-category</url-pattern>
-  
+	  <servlet-name>platecategory</servlet-name>
+	  <url-pattern>/plate-category</url-pattern>  
   </servlet-mapping>
   
-
+   <servlet>
+	  <servlet-name>useraccount</servlet-name>
+	  <servlet-class>com.transcore.controller.UserAccountController</servlet-class>
+  </servlet>
   
   <servlet-mapping>
-  	<servlet-name>addcategory</servlet-name>
-  	<url-pattern>/add-category</url-pattern>
+	  <servlet-name>useraccount</servlet-name>
+	  <url-pattern>/login</url-pattern>  
+	  <url-pattern>/logout</url-pattern> 
   </servlet-mapping>
+     
+  <filter>
+  	<filter-name>authfilter</filter-name>
+  	<filter-class>com.transcore.filter.AuthenticateFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>authfilter</filter-name>
+  	<url-pattern>/views/*</url-pattern>
+  	<url-pattern>/plate-category</url-pattern>  
+  	<url-pattern>/login</url-pattern>	
+  </filter-mapping>
+  
+  <context-param>
+	  <param-name>DTSDB</param-name>
+	  <param-value>jdbc:sqlserver://localhost:1433;databaseName=dbDTS</param-value> 
+  </context-param>
+  
+  <context-param>
+  	<param-name>testDB</param-name>
+  	<param-value>jdbc:sqlserver://localhost:1433;databaseName=Test</param-value> 
+  </context-param>
   
 </web-app>

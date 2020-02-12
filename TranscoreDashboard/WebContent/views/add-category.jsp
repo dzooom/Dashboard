@@ -15,6 +15,8 @@
 
 <form action="${pageContext.request.contextPath}/plate-category" method="post">
 
+<input type="hidden" name="hidaction" id="hidaction" value="${action}">
+<input type="hidden" name="hidcategoryid" id="hidcategoryid" value="${category.plateCategoryId}">
 
 <div class="container">
 
