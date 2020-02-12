@@ -11,3 +11,21 @@ https://javapapers.com/servlet/what-is-servlet-mapping/
 
 
 https://stackoverflow.com/questions/5031018/how-to-invoke-a-servlet-without-mapping-in-web-xml
+
+
+https://stackoverflow.com/questions/11645516/giving-multiple-url-patterns-to-servlet-filter
+
+
+=============
+
+topics to look and write :
+
+1 - context path: the root of web application is stored and can get from request.contextPath() method . suppose user put url on browser is 
+http://localhost:8080/TranscoreDashboard/views/add-category.jsp
+
+Here TranscoreDashboard is a contextPath.
+
+
+2 - servlet mapping and jsp mapping in web.xml
+
+3 - web-inf
