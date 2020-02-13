@@ -18,6 +18,8 @@ https://stackoverflow.com/questions/11645516/giving-multiple-url-patterns-to-ser
 
 https://www.splessons.com/lesson/jsp-security/
 
+http://tomcat.apache.org/tomcat-5.5-doc/realm-howto.html
+
 =========================================================
 
 topics to look and write :
