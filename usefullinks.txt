@@ -33,6 +33,10 @@ http://www.thejavageek.com/2013/07/07/configure-jdbcrealm-jaas-for-mysql-and-tom
 
 https://tomcat.apache.org/tomcat-6.0-doc/realm-howto.html#JAASRealm
 
+
+
+https://www.javaworld.com/article/2072850/j2ee-security--container-versus-custom.html?page=3
+
 =========================================================
 
 topics to look and write :
