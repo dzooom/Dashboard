@@ -29,6 +29,8 @@ https://developer.jboss.org/thread/42821
 
 https://www.htmlgoodies.com/beyond/java/implementing-java-based-user-authentication-with-jaas.html
 
+http://www.thejavageek.com/2013/07/07/configure-jdbcrealm-jaas-for-mysql-and-tomcat-7-with-form-based-authentication/
+
 =========================================================
 
 topics to look and write :
