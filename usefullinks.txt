@@ -20,6 +20,15 @@ https://www.splessons.com/lesson/jsp-security/
 
 http://tomcat.apache.org/tomcat-5.5-doc/realm-howto.html
 
+https://tomcat.apache.org/tomcat-7.0-doc/realm-howto.html
+
+https://stackoverflow.com/questions/6291302/jaas-authenticate-application-users-on-a-database-table
+
+https://developer.jboss.org/thread/42821
+
+
+https://www.htmlgoodies.com/beyond/java/implementing-java-based-user-authentication-with-jaas.html
+
 =========================================================
 
 topics to look and write :
