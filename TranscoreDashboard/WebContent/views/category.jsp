@@ -11,6 +11,7 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+	<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
 	<script type="text/javascript" src="js/application.js"></script>
 </head>
 <body>

@@ -21,11 +21,15 @@ public class PlateCategoryDAO {
 
 	public static List<PlateCategory> getList(Map<String,String> searchCriteria, short pageSize, short pageNumber) throws SQLException,ClassNotFoundException{
 		
+		List<PlateCategory> plateCategoryList = new ArrayList<PlateCategory>();	
+		
+		if(pageSize < 1 || pageNumber < 1) {
+			pageSize = 10;
+			pageNumber = 1;
+		}
+		
 		short upperLimit = (short)(pageSize * pageNumber);
 		short lowerLmit = (short)(((pageNumber - 1) * pageSize) + 1);
-		
-		
-		List<PlateCategory> plateCategoryList = new ArrayList<PlateCategory>();	
 		
 		Connection connection = null;
 		Statement statement = null;
@@ -51,11 +55,13 @@ public class PlateCategoryDAO {
 			
 			for (Map.Entry<String, String> element : searchCriteria.entrySet()) {
 				
-				 if(element.getValue().matches("^[a-zA-Z\\s()]*$")) {
-					 queryBuilder.append(" AND " + element.getKey()  + "='" + element.getValue() + "'");
+				lowerLmit = 1;
+				
+				 if(element.getValue().matches("^[0-9]*$")) { 
+					 queryBuilder.append(" AND " + element.getKey()  + "=" + element.getValue());
 				 }
 				 else {
-					 queryBuilder.append(" AND " + element.getKey()  + "=" + element.getValue());
+					 queryBuilder.append(" AND " + element.getKey()  + "='" + element.getValue() + "'");
 				 }		
 			}
 			
@@ -64,6 +70,8 @@ public class PlateCategoryDAO {
 			queryBuilder.append("SELECT * FROM paged WHERE RowNumber BETWEEN " + lowerLmit + " AND " + upperLimit );
 			
 			String query = queryBuilder.toString();
+			
+			System.out.println(query);
 			
 			recordSet =  statement.executeQuery(query);	
 			

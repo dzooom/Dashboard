@@ -90,9 +90,8 @@ public class PlateCategoryController extends HttpServlet {
 				
 		List<PlateCategory> plateCategoryList;
 		String categoryDesc =  request.getParameter("categoryen");		
-		String displayOrder = request.getParameter("displayorder");
-		
-		short page = 2;
+		String displayOrder = request.getParameter("displayorder");		
+		short page = 1;
 		short pageSize = 10;
 		
 		try {

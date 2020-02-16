@@ -19,8 +19,7 @@ function validateForm(){
 
 
 function searchCategory()
-{
-		
+{		
 	var category = '';
 	var displayorder = '';	
 	var queryParams = '';	
@@ -29,27 +28,42 @@ function searchCategory()
 	
 	category = document.getElementById('idcategorydesc').value;
 	displayorder = document.getElementById('iddisplayorder').value;
+	queryObject = {};
 		
 	if(category !== ''){
-		querystring = querystring + 'categoryen=' + category; 
+		queryObject["categoryen"] = category;
+		
+		//querystring = querystring + 'categoryen=' + category; 
 	}
-	if(displayOrder !== ''){
-		querystring = querystring + '&displayorder=' + displayOrder;
+	if(displayorder !== ''){
+		
+		queryObject["displayorder"] = displayOrder;
+		
+		//querystring = querystring + '&displayorder=' + displayOrder;
 	}
 	
 	
-	for(var i = 0; queryarray.length; i++)
+	for(var i = 0; i < queryarray.length; i++)
 	{
 			var querypart = queryarray[i];
 			
-			if(querypart.includes('page')){
-				
+			if(querypart.includes('page'))
+			{
+				var partArray = querypart.split('=');
+				queryObject[partArray[0]] = partArray[1]
 			}
 			
-			if(querypart.includes('pagesize')){
-				
+			if(querypart.includes('pagesize'))
+			{
+				var partArray = querypart.split('=');
+				queryObject[partArray[0]] = partArray[1]
 			}
 	}	
+	
+	console.log(queryObject);
+	var query = $.param(queryObject);
+	
+	window.location.href = querystring + query;
 }
 
 
