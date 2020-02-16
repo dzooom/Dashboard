@@ -89,10 +89,35 @@ public class PlateCategoryController extends HttpServlet {
 	public void getPlateCategoryList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 				
 		List<PlateCategory> plateCategoryList;
+		String categoryDesc =  request.getParameter("categoryen");		
+		String displayOrder = request.getParameter("displayorder");
+		
+		short page = 2;
+		short pageSize = 10;
+		
+		try {
+			 page = Short.parseShort(request.getParameter("page"));
+			 pageSize = Short.parseShort(request.getParameter("pagesize"));
+		}
+		catch(NumberFormatException e) {
+			
+		}	
+				
+		
+		Map<String,String> queryParams = new HashMap<String, String>();
+		
+		if(categoryDesc != null && !categoryDesc.trim().equals("")) {
+			categoryDesc =  java.net.URLDecoder.decode(categoryDesc);
+			queryParams.put("vcPlateCategDesc", categoryDesc);
+		}
+		
+		if(displayOrder != null && !displayOrder.trim().equals("")) {
+			queryParams.put("tiDisplayOrder", displayOrder);
+		}
 		
 		try 
 		{
-			plateCategoryList = PlateCategoryDAO.getList();			
+			plateCategoryList = PlateCategoryDAO.getList(queryParams , pageSize, page);			
 			request.setAttribute("data", plateCategoryList);		
 			RequestDispatcher dispatcher =  request.getRequestDispatcher("/views/category.jsp");
 			dispatcher.forward(request, response);

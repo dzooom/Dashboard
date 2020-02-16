@@ -4,7 +4,11 @@ import com.transcore.entity.*;
 import com.transcore.util.*;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class PlateCategoryDAO {
@@ -15,7 +19,11 @@ public class PlateCategoryDAO {
 		dbUrl = url;
 	}
 
-	public static List<PlateCategory> getList() throws SQLException,ClassNotFoundException{
+	public static List<PlateCategory> getList(Map<String,String> searchCriteria, short pageSize, short pageNumber) throws SQLException,ClassNotFoundException{
+		
+		short upperLimit = (short)(pageSize * pageNumber);
+		short lowerLmit = (short)(((pageNumber - 1) * pageSize) + 1);
+		
 		
 		List<PlateCategory> plateCategoryList = new ArrayList<PlateCategory>();	
 		
@@ -31,8 +39,33 @@ public class PlateCategoryDAO {
 			// 2 - create statement			
 			statement = connection.createStatement();
 			
-			// 3 - create and execute query 			
-			recordSet =  statement.executeQuery("SELECT * FROM stbPlateCateg");	
+			// 3 - create and execute query 
+			
+			StringBuilder queryBuilder = new StringBuilder();
+			queryBuilder.append("  WITH paged AS \r\n" + 
+					"  (\r\n" + 
+					"	  SELECT ROW_NUMBER() OVER (ORDER BY vcPlateCategDesc) RowNumber , tiPlateCategID , vcPlateCategDesc , tiDisplayOrder,nvcPlateCategArbDesc\r\n" + 
+					"	  FROM stbPlateCateg WHERE 1 = 1 \r\n" + 
+					"  ");
+			
+			
+			for (Map.Entry<String, String> element : searchCriteria.entrySet()) {
+				
+				 if(element.getValue().matches("^[a-zA-Z\\s()]*$")) {
+					 queryBuilder.append(" AND " + element.getKey()  + "='" + element.getValue() + "'");
+				 }
+				 else {
+					 queryBuilder.append(" AND " + element.getKey()  + "=" + element.getValue());
+				 }		
+			}
+			
+			queryBuilder.append(") ");
+			
+			queryBuilder.append("SELECT * FROM paged WHERE RowNumber BETWEEN " + lowerLmit + " AND " + upperLimit );
+			
+			String query = queryBuilder.toString();
+			
+			recordSet =  statement.executeQuery(query);	
 			
 			while(recordSet.next()) {
 				

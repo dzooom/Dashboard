@@ -11,6 +11,7 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+	<script type="text/javascript" src="js/application.js"></script>
 </head>
 <body>
 
@@ -22,6 +23,14 @@
 
 <div>
 <div style="padding-top:20px">
+
+<div id="search">
+	<input type="text" name="categorydesc" id="idcategorydesc">
+	<input type="text" name="displayorder" id="iddisplayorder">
+	<a href="#" onclick="searchCategory();">Search</a>
+</div>
+
+
 <a href="${pageContext.request.contextPath}/views/add-category.jsp" class="btn btn-primary">Add Category</a>
 <table  class="table">
 	<thead>
